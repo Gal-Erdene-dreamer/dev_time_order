@@ -1,4 +1,3 @@
-const path = require("path");
 const MyError = require("../utils/myError");
 const asyncHandler = require("../middleware/asyncHandler");
 // const paginate = require("../utils/paginateSequelize");

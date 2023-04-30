@@ -1,23 +1,17 @@
 [
     {
-        "firstname": "Galerdene",
-        "lastname": "Chinbat",
-        "register": "ФВ02230513",
-        "phoneNum": "94552906",
-        "voiceID": ""
+        "id": 1,
+        "name": "Гал-Эрдэнэ",
+        "phone": "95566466"
     },
     {
-        "firstname": "Baurjan",
-        "lastname": "Jalgaskhan",
-        "register": "ФВ02230512",
-        "phoneNum": "95269864",
-        "voiceID": ""
+        "id": 2,
+        "name": "Бауржан",
+        "phone": "85269864"
     },
     {
-        "firstname": "Tsetsgee",
-        "lastname": "Bat",
-        "register": "ФВ99230413",
-        "phoneNum": "85267456",
-        "voiceID": ""
+        "id": 3,
+        "name": "Баттөгс",
+        "phone": "90254556"
     }
 ]

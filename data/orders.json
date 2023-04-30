@@ -1,0 +1,17 @@
+[
+    {
+        "order_time": 1,
+        "categoryID": 1,
+        "customerID": 1
+    },
+    {
+        "order_time": 2,
+        "categoryID": 2,
+        "customerID": 2
+    },
+    {
+        "order_time": 3,
+        "categoryID": 3,
+        "customerID": 3
+    }
+]

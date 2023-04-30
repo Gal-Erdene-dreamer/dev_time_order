@@ -12,12 +12,12 @@ const {
 } = require("../controller/customer");
 
 // API category
-router.route("/").get(getCustomers).post(auth, createCustomer);
+router.route("/").get(getCustomers).post(createCustomer);
 
-router
-  .route("/:id")
-  .get(getCustomer)
-  .put(updateCustomer)
-  .delete(deleteCustomer);
+// router
+//   .route("/:id")
+//   .get(getCustomer)
+//   .put(updateCustomer)
+//   .delete(deleteCustomer);
 
 module.exports = router;
