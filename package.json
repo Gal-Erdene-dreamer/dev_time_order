@@ -1,5 +1,5 @@
 {
-  "name": "devhackathonvol3",
+  "name": "devhackathonvol",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ulambayar0511/devhackathonvol3.git"
+    "url": "git+https://github.com/Gal-Erdene-dreamer/dev_time_order.git"
   },
   "keywords": [],
   "author": "",
@@ -36,7 +36,7 @@
     "nodemon": "^2.0.22"
   },
   "bugs": {
-    "url": "https://github.com/ulambayar0511/devhackathonvol3/issues"
+    "url": "https://github.com/Gal-Erdene-dreamer/dev_time_order/issues"
   },
-  "homepage": "https://github.com/ulambayar0511/devhackathonvol3#readme"
+  "homepage": "https://github.com/Gal-Erdene-dreamer/dev_time_order#readme"
 }
