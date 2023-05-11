@@ -54,3 +54,18 @@ exports.createOrder = asyncHandler(async (req, res, next) => {
     order,
   });
 });
+
+exports.deleteOrder = asyncHandler(async (req, res, next) => {
+  const order = await req.db.orders.findByPk(req.params.id);
+
+  if (!order) {
+    throw new MyError(` Хэрэглэгч олдсонгүй`, 400);
+  }
+
+  await order.destroy();
+
+  res.status(200).json({
+    success: true,
+    message: "Амжилттай устгалаа",
+  });
+});
