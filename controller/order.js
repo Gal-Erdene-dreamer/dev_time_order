@@ -24,20 +24,16 @@ exports.getOrders = asyncHandler(async (req, res, next) => {
   orders.forEach((el) => {
     switch (el.order_time) {
       case 1:
-        el.dataValues.start_time = days + " 11:00:00";
-        el.dataValues.end_time = days + " 12:00:00";
-        break;
-      case 2:
-        el.dataValues.start_time = days + " 12:00:00";
-        el.dataValues.end_time = days + " 13:00:00";
-        break;
-      case 3:
         el.dataValues.start_time = days + " 13:00:00";
         el.dataValues.end_time = days + " 14:00:00";
         break;
+      case 2:
+        el.dataValues.start_time = days + " 15:00:00";
+        el.dataValues.end_time = days + " 16:00:00";
+        break;
       default:
-        el.dataValues.start_time = days + " 11:00:00";
-        el.dataValues.end_time = days + " 12:00:00";
+        el.dataValues.start_time = days + " 13:00:00";
+        el.dataValues.end_time = days + " 14:00:00";
     }
   });
 
