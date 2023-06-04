@@ -31,10 +31,10 @@ app.use("/login", loginRoutes);
 app.use("/register", registerRoutes);
 app.use(errorHandler);
 
-db.product.belongsTo(db.category, {
-  foreignKey: "categoryID",
-  as: "Category",
-});
+// db.product.belongsTo(db.category, {
+//   foreignKey: "categoryID",
+//   as: "Category",
+// });
 // db.category.hasMany(db.product, {
 //   as: "Products",
 //   foreignKey: "categoryID",
