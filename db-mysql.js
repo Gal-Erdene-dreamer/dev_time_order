@@ -29,6 +29,7 @@ const Models = [
   require("./models/hospital"),
   require("./models/customer"),
   require("./models/order"),
+  require("./models/history"),
 ];
 
 Models.forEach((model) => {

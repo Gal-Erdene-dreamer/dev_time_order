@@ -8,12 +8,14 @@ exports.getOrders = asyncHandler(async (req, res, next) => {
         model: req.db.customer,
         association: "Customer",
         required: true,
+        attributes: ["name", "phone"],
       },
     ],
   });
   if (!orders) {
     throw new MyError("Захиалга байхгүй байна", 404);
   }
+
   const date = new Date();
   let days = date.toISOString().slice(0, 10);
   orders.forEach((el) => {
