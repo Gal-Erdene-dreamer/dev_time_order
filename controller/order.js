@@ -6,7 +6,7 @@ exports.getOrders = asyncHandler(async (req, res, next) => {
     include: [
       {
         model: req.db.customer,
-        association: "Customer",
+        association: "customer",
         required: true,
         attributes: ["name", "phone"],
       },

@@ -42,11 +42,11 @@ app.use(errorHandler);
 
 db.orders.belongsTo(db.customer, {
   foreignKey: "customerID",
-  as: "Customer",
+  as: "customer",
 });
 db.customer.hasMany(db.orders, {
   foreignKey: "customerID",
-  as: "Orders",
+  as: "orders",
 });
 
 // db.orders.belongsTo(db.category, {
