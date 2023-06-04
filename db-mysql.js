@@ -29,7 +29,6 @@ const Models = [
   require("./models/hospital"),
   require("./models/customer"),
   require("./models/order"),
-  require("./models/category"),
 ];
 
 Models.forEach((model) => {

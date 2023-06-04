@@ -49,34 +49,23 @@ db.customer.hasMany(db.orders, {
   as: "Orders",
 });
 
-db.orders.belongsTo(db.category, {
-  foreignKey: "categoryID",
-  as: "Category",
-});
-db.category.hasMany(db.orders, {
-  foreignKey: "categoryID",
-  as: "Orders",
-});
+// db.orders.belongsTo(db.category, {
+//   foreignKey: "categoryID",
+//   as: "Category",
+// });
+// db.category.hasMany(db.orders, {
+//   foreignKey: "categoryID",
+//   as: "Orders",
+// });
 
-db.category.belongsTo(db.hospital, {
-  foreignKey: "categoryID",
-  as: "Hospital",
-});
-db.hospital.hasMany(db.category, {
-  foreignKey: "categoryID",
-  as: "Categories",
-});
-
-// db.subcategory.belongsTo(db.category,{foreignKey:'CategoryId', as: 'Category'});
-// db.category.hasMany(db.subcategory,{as: 'SubCategories',foreignKey:'CategoryId'});
-
-// db.favorite.belongsTo(db.product,{ foreignKey:'ProductId' , as: 'Product'});
-// db.product.hasMany(db.favorite,{ as:'fav', foreignKey:'ProductId' });
-
-// db.cart.belongsTo(db.product,{ foreignKey:'ProductId' , as: 'Product'});
-// db.product.hasMany(db.cart,{ as:'cart', foreignKey:'ProductId' });
-
-// db.favorite.hasMany(db.user,{ foreignKey:'UserId' , as: 'User'});
+// db.category.belongsTo(db.hospital, {
+//   foreignKey: "categoryID",
+//   as: "Hospital",
+// });
+// db.hospital.hasMany(db.category, {
+//   foreignKey: "categoryID",
+//   as: "Categories",
+// });
 
 db.ssSequelize
   .sync()

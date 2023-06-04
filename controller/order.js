@@ -9,11 +9,6 @@ exports.getOrders = asyncHandler(async (req, res, next) => {
         association: "Customer",
         required: true,
       },
-      {
-        model: req.db.category,
-        association: "Category",
-        required: true,
-      },
     ],
   });
   if (!orders) {

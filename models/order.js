@@ -13,12 +13,8 @@ module.exports = function (sequelize, DataTypes) {
         allowNull: false,
       },
       categoryID: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.TEXT,
         allowNull: false,
-        references: {
-          model: "category",
-          key: "id",
-        },
       },
       customerID: {
         type: DataTypes.INTEGER,
@@ -40,11 +36,6 @@ module.exports = function (sequelize, DataTypes) {
           unique: true,
           using: "BTREE",
           fields: [{ name: "id" }],
-        },
-        {
-          name: "FK_order_1",
-          using: "BTREE",
-          fields: [{ name: "categoryID" }],
         },
         {
           name: "FK_order_2",
