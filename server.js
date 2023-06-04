@@ -25,7 +25,7 @@ app.use(fileupload());
 app.use(injectDb(db));
 app.use("/customer", customerRoutes);
 app.use("/order", orderRoutes);
-app.use("/category", categoryRoutes);
+// app.use("/category", categoryRoutes);
 app.use("/hospital", hospitalRoutes);
 app.use("/login", loginRoutes);
 app.use("/register", registerRoutes);
