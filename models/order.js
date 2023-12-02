@@ -1,35 +1,67 @@
 const Sequelize = require("sequelize");
 module.exports = function (sequelize, DataTypes) {
-  return sequelize.define(
-    "orders",
+  const order = sequelize.define(
+    "order",
     {
       id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
       },
-      order_time: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
-      categoryID: {
-        type: DataTypes.TEXT,
-        allowNull: false,
-      },
-      customerID: {
+      user_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-          model: "customer",
+          model: "users",
           key: "id",
         },
+      },
+      driver_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: "employees",
+          key: "id",
+        },
+      },
+      status: {
+        type: Sequelize.ENUM,
+        values: ["going", "new", "completed", "canceled"],
+        allowNull: false,
+        defaultValue: "new",
+      },
+      priority: {
+        type: Sequelize.ENUM,
+        values: ["critical", "high", "medium", "low"],
+        allowNull: false,
+        defaultValue: "high",
+      },
+      order_time: {
+        type: DataTypes.DATE,
+        allowNull: false,
+      },
+      customer_latitude: {
+        type: DataTypes.DOUBLE,
+        validate: {
+          min: -90,
+          max: 90,
+        },
+      },
+      customer_longitude: {
+        type: DataTypes.DOUBLE,
+        validate: {
+          min: -180,
+          max: 180,
+        },
+      },
+      description: {
+        type: DataTypes.TEXT,
       },
     },
     {
       sequelize,
       freezeTableName: true,
       tableName: "orders",
-      timestamps: false,
       indexes: [
         {
           name: "PRIMARY",
@@ -38,11 +70,26 @@ module.exports = function (sequelize, DataTypes) {
           fields: [{ name: "id" }],
         },
         {
+          name: "FK_order_1",
+          using: "BTREE",
+          fields: [{ name: "user_id" }],
+        },
+        {
           name: "FK_order_2",
           using: "BTREE",
-          fields: [{ name: "customerID" }],
+          fields: [{ name: "driver_id" }],
         },
       ],
     }
   );
+
+  order.addScope("filter_by_status", (status) => {
+    const whereClause = status ? { status } : {};
+    console.log(whereClause);
+    return {
+      where: whereClause,
+    };
+  });
+
+  return order;
 };

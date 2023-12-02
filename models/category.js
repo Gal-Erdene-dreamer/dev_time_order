@@ -25,7 +25,7 @@ module.exports = function (sequelize, DataTypes) {
       sequelize,
       freezeTableName: true,
       tableName: "category",
-      timestamps: false,
+      timestamps: true,
       indexes: [
         {
           name: "PRIMARY",

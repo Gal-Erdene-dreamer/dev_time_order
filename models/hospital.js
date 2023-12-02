@@ -1,10 +1,6 @@
 const Sequelize = require("sequelize");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const crypto = require("crypto");
-
 module.exports = function (sequelize, DataTypes) {
-  const hospital = sequelize.define(
+  return sequelize.define(
     "hospital",
     {
       id: {
@@ -13,39 +9,53 @@ module.exports = function (sequelize, DataTypes) {
         autoIncrement: true,
       },
       name: {
-        type: DataTypes.STRING(45),
+        type: DataTypes.STRING(50),
         allowNull: false,
       },
       phone: {
-        type: DataTypes.CHAR(8),
-        allowNull: false,
+        type: DataTypes.STRING(25),
+        allowNull: true,
         unique: "phone must be unique",
+        validate: {
+          len: [4, 25],
+        },
       },
       email: {
         type: DataTypes.STRING(45),
-        allowNull: false,
+        allowNull: true,
         unique: "email must be unique",
         match: [
           /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
           "Email буруу байна",
         ],
       },
-      password: {
-        type: DataTypes.STRING(100),
-        allowNull: false,
-      },
-      image: {
-        type: DataTypes.TEXT(),
-        allowNull: true,
-      },
       location: {
         type: DataTypes.STRING(250),
+        allowNull: true,
+      },
+      latitude: {
+        type: DataTypes.DOUBLE,
+        validate: {
+          min: -90,
+          max: 90,
+        },
+      },
+      longitude: {
+        type: DataTypes.DOUBLE,
+        validate: {
+          min: -180,
+          max: 180,
+        },
+      },
+      description: {
+        type: DataTypes.TEXT(),
         allowNull: true,
       },
     },
     {
       sequelize,
-      tableName: "hospital",
+      freezeTableName: true,
+      tableName: "hospitals",
       timestamps: false,
       indexes: [
         {
@@ -57,38 +67,4 @@ module.exports = function (sequelize, DataTypes) {
       ],
     }
   );
-
-  hospital.prototype.generatePasswordChangePin = function () {
-    const resetPin = Math.floor(
-      Math.random() * (999999 - 100000 + 1) + 100000
-    ).toString();
-
-    this.resetPasswordToken = crypto
-      .createHash("sha256")
-      .update(resetPin)
-      .digest("hex");
-
-    this.resetTokenExpire = Date.now() + 1800000;
-
-    return resetPin;
-  };
-
-  hospital.prototype.getJsonWebToken = function () {
-    const token = jwt.sign(
-      {
-        id: this.id,
-        email: this.email,
-        name: this.name,
-        phone: this.phone,
-      },
-      process.env.JWT_SECRET,
-      { expiresIn: process.env.JWT_EXPIRESIN }
-    );
-    return token;
-  };
-
-  hospital.prototype.checkPassword = async function (enteredPassword) {
-    return await bcrypt.compareSync(enteredPassword, this.password);
-  };
-  return hospital;
 };

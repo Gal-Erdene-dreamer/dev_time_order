@@ -47,10 +47,11 @@ const ssSequelize = new Sequelize(
 ssSequelize.dialect.supports.schemas = true;
 
 const Models = [
+  require("./models/user"),
+  require("./models/employee"),
   require("./models/hospital"),
-  require("./models/customer"),
   require("./models/order"),
-  require("./models/history"),
+  // require("./models/history"),
 ];
 
 Models.forEach((model) => {

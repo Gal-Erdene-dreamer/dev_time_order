@@ -1,5 +1,5 @@
 {
-    "additional": {
-        "timestamps": false
-    }
+  "additional": {
+    "timestamps": true
+  }
 }

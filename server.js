@@ -3,30 +3,32 @@ const express = require("express");
 var fs = require("fs");
 var path = require("path");
 const colors = require("colors");
-const errorHandler = require("./middleware/error");
-const morgan = require("morgan");
-const hospitalRoutes = require("./routes/hospital");
-const historyRoutes = require("./routes/history");
-const orderRoutes = require("./routes/order");
-const customerRoutes = require("./routes/customer");
-const loginRoutes = require("./routes/login");
-const registerRoutes = require("./routes/register");
 const fileupload = require("express-fileupload");
 const cors = require("cors");
+const errorHandler = require("./middleware/error");
+
+const helmet = require("helmet");
+const userRoutes = require("./routes/user_routes");
+const employeeRoutes = require("./routes/employee_routes");
+const orderRoutes = require("./routes/order_routes");
+const hospitalRoutes = require("./routes/hospital_routes");
+const loginRoutes = require("./routes/login_routes");
+const registerRoutes = require("./routes/register_routes");
+
 const injectDb = require("./middleware/injectDb");
 
 const db = require("./db-mysql");
 
 const app = express();
-
+app.use(helmet());
 app.use(express.json());
 app.use(cors());
 app.use(fileupload());
 app.use(injectDb(db));
-app.use("/customer", customerRoutes);
-app.use("/order", orderRoutes);
-app.use("/history", historyRoutes);
 app.use("/hospital", hospitalRoutes);
+app.use("/orders", orderRoutes);
+app.use("/employees", employeeRoutes);
+app.use("/users", userRoutes);
 app.use("/login", loginRoutes);
 app.use("/register", registerRoutes);
 app.use(errorHandler);
@@ -40,23 +42,32 @@ app.use(errorHandler);
 //   foreignKey: "categoryID",
 // });
 
-db.orders.belongsTo(db.customer, {
-  foreignKey: "customerID",
-  as: "customer",
+db.order.belongsTo(db.user, {
+  foreignKey: "user_id",
+  as: "user",
 });
-db.customer.hasMany(db.orders, {
-  foreignKey: "customerID",
+db.user.hasMany(db.order, {
+  foreignKey: "user_id",
   as: "orders",
 });
 
-// db.orders.belongsTo(db.category, {
-//   foreignKey: "categoryID",
-//   as: "Category",
-// });
-// db.category.hasMany(db.orders, {
-//   foreignKey: "categoryID",
-//   as: "Orders",
-// });
+db.employee.hasMany(db.order, {
+  foreignKey: "driver_id",
+  as: "orders",
+});
+db.order.belongsTo(db.employee, {
+  foreignKey: "driver_id",
+  as: "driver",
+});
+
+db.employee.belongsTo(db.hospital, {
+  foreignKey: "hospital_id",
+  as: "hospital",
+});
+db.hospital.hasMany(db.employee, {
+  foreignKey: "hospital_id",
+  as: "employees",
+});
 
 // db.category.belongsTo(db.hospital, {
 //   foreignKey: "categoryID",

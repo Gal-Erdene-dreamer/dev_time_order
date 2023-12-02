@@ -1,6 +1,5 @@
 const asyncHandler = require("../middleware/asyncHandler");
 const sendEmail = require("../utils/email");
-const crypto = require("crypto");
 const bcrypt = require("bcrypt");
 const myError = require("../utils/myError");
 
@@ -8,43 +7,64 @@ const saltRounds = 10;
 const salt = bcrypt.genSaltSync(saltRounds);
 // register
 exports.register = asyncHandler(async (req, res, next) => {
-  if (
-    !req.body.email ||
-    !req.body.name ||
-    !req.body.phone ||
-    !req.body.password ||
-    !req.body.location
-  ) {
-    throw new myError(`Мэдээлэлээ бүрэн оруулна уу`, 400);
-  }
+  // if (
+  //   !req.body.email ||
+  //   !req.body.name ||
+  //   !req.body.phone ||
+  //   !req.body.password ||
+  //   !req.body.location
+  // ) {
+  //   throw new myError(`Мэдээлэлээ бүрэн оруулна уу`, 400);
+  // }
 
-  const hospital1 = await req.db.hospital.findOne({
+  let user2 = await req.db.user.findOne({
     where: { email: req.body.email },
   });
-  console.log(hospital1);
-  if (hospital1 != null) {
+  console.log(user2);
+  if (user2 != null) {
     throw new myError(`Уучлаарай. Бүртгэлтэй хэрэглэгч байна`, 400);
   }
-  const hospital2 = await req.db.hospital.findOne({
+  user2 = await req.db.user.findOne({
     where: { phone: req.body.phone },
   });
-  if (hospital2 != null) {
+  if (user2 != null) {
     throw new myError(`Уучлаарай. Бүртгэлтэй хэрэглэгч байна`, 400);
   }
   const hashedPass = bcrypt.hashSync(req.body.password, salt);
   console.log(hashedPass);
-  const hospital = await req.db.hospital.create({
-    email: req.body.email,
-    name: req.body.name,
-    phone: req.body.phone,
-    location: req.body.location,
-    password: hashedPass,
-  });
-  // hospital.save();
+  req.body.password = hashedPass;
+  const user = await req.db.user.create(req.body);
+  // user.save();
 
   res.status(200).json({
     success: true,
-    data: hospital,
+    data: user,
+  });
+});
+
+exports.employeeRegister = asyncHandler(async (req, res, next) => {
+  let employee2 = await req.db.employee.findOne({
+    where: { email: req.body.email },
+  });
+  console.log(employee2);
+  if (employee2 != null) {
+    throw new myError(`Уучлаарай. Бүртгэлтэй хэрэглэгч байна`, 400);
+  }
+  employee2 = await req.db.employee.findOne({
+    where: { phone: req.body.phone },
+  });
+  if (employee2 != null) {
+    throw new myError(`Уучлаарай. Бүртгэлтэй хэрэглэгч байна`, 400);
+  }
+  const hashedPass = bcrypt.hashSync(req.body.password, salt);
+  console.log(hashedPass);
+  req.body.password = hashedPass;
+  const employee = await req.db.employee.create(req.body);
+  // employee.save();
+
+  res.status(200).json({
+    success: true,
+    data: employee,
   });
 });
 

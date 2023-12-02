@@ -5,7 +5,8 @@ const bcrypt = require("bcrypt");
 // buh users-iig harah
 const saltRounds = 10;
 const salt = bcrypt.genSaltSync(saltRounds);
-exports.getHospitals = asyncHandler(async (req, res, next) => {
+
+exports.getUsers = asyncHandler(async (req, res, next) => {
   // const page =parseInt(req.query.page) || 1;
   // const limit =parseInt(req.query.limit) || 10;
   // const select =req.query.select;
@@ -15,27 +16,27 @@ exports.getHospitals = asyncHandler(async (req, res, next) => {
 
   // pagination
   // const pagination = await paginate (page, limit, User);
-  const hospital = await req.db.hospital.findAll();
+  const users = await req.db.user.findAll();
   res.status(200).json({
     success: true,
-    data: hospital,
+    data: users,
   });
 });
 
 // neg hereglegch ID-aar shuuj harah
-exports.getHospital = asyncHandler(async (req, res, next) => {
-  const hospital = await req.db.hospital.findByPk(req.params.id);
-  if (!hospital) {
-    throw new myError(req.params.id + `: iim ID-tai user oldsongui`, 400);
+exports.getUser = asyncHandler(async (req, res, next) => {
+  const user = await req.db.user.findByPk(req.params.id);
+  if (!user) {
+    throw new myError(`User with id ${req.params.id} not found`, 404);
   }
 
   res.status(200).json({
     success: true,
-    data: hospital,
+    data: user,
   });
 });
 
-exports.createHospital = asyncHandler(async (req, res, next) => {
+exports.createUser = asyncHandler(async (req, res, next) => {
   if (
     !req.body.email ||
     !req.body.name ||
@@ -45,21 +46,21 @@ exports.createHospital = asyncHandler(async (req, res, next) => {
     throw new myError(`Мэдээлэлээ бүрэн оруулна уу`, 400);
   }
 
-  const hospital1 = await req.db.hospital.findOne({
+  const user3 = await req.db.user.findOne({
     where: { email: req.body.email },
   });
-  console.log(hospital1);
-  if (hospital1 != null) {
+  console.log(user3);
+  if (user3 != null) {
     throw new myError(`Уучлаарай. Бүртгэлтэй хэрэглэгч байна`, 400);
   }
-  const hospital2 = await req.db.hospital.findOne({
+  const user2 = await req.db.user.findOne({
     where: { phone: req.body.phone },
   });
-  if (hospital2 != null) {
+  if (user2 != null) {
     throw new myError(`Уучлаарай. Бүртгэлтэй хэрэглэгч байна`, 400);
   }
   const hashedPass = bcrypt.hashSync(req.body.password, salt);
-  const hospital = await req.db.hospital.create({
+  const user = await req.db.user.create({
     email: req.body.email,
     name: req.body.name,
     phone: req.body.phone,
@@ -69,7 +70,7 @@ exports.createHospital = asyncHandler(async (req, res, next) => {
 
   res.status(200).json({
     success: true,
-    data: hospital,
+    data: user,
   });
   // user.save();
   // res.status(200).json({

@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-// const { protect, authorize } = require("../middleware/protect");
+const { protect, authorize } = require("../middleware/protect");
 const { auth } = require("../middleware/authMiddleware");
 
 const {
@@ -11,6 +11,7 @@ const {
   deletehistory,
 } = require("../controller/history");
 
+router.use(protect);
 // API category
 router.route("/").get(getHistories).post(createHistory);
 
