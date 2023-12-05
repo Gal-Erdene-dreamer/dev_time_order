@@ -11,8 +11,8 @@
     "id": 2,
     "name": "Болдын Цэцэг",
     "phone": "94566556",
-    "status": "active",
     "role": "customer",
-    "email": "batsukh@gmail.com"
+    "email": "batsukh@gmail.com",
+    "password": "1234"
   }
 ]

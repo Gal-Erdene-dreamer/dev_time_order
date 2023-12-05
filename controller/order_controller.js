@@ -16,9 +16,25 @@ exports.getOrders = asyncHandler(async (req, res, next) => {
       //   },
       // ],
     });
+  const orderStatusCounts = await req.db.order.findAll({
+    attributes: [
+      "status",
+      [req.db.order.sequelize.fn("COUNT", "status"), "count"],
+    ],
+    group: ["status"],
+  });
+  console.log(orderStatusCounts);
+  const total_count = orderStatusCounts.reduce((result, orderObject) => {
+    const { status, count } = orderObject.dataValues;
+    result[status] = count;
+    return result;
+  }, {});
+  console.log(total_count);
+
   res.status(200).json({
     success: true,
     orders,
+    total_count,
   });
 });
 
