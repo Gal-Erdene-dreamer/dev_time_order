@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "name": "superadmin",
+    "phone": "94755644",
+    "email": "superadmin@gmail.com",
+    "role": "superadmin",
+    "password": "1234"
+  },
+  {
+    "id": 2,
+    "name": "Болдын Цэцэг",
+    "phone": "94566556",
+    "status": "active",
+    "role": "customer",
+    "email": "batsukh@gmail.com"
+  }
+]

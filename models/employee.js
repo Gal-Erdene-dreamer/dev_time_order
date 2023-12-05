@@ -61,8 +61,7 @@ module.exports = function (sequelize, DataTypes) {
         allowNull: true,
       },
       location: {
-        type: DataTypes.STRING(250),
-        allowNull: true,
+        type: DataTypes.TEXT,
       },
       latitude: {
         type: DataTypes.DOUBLE,

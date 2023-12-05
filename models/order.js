@@ -36,10 +36,6 @@ module.exports = function (sequelize, DataTypes) {
         allowNull: false,
         defaultValue: "high",
       },
-      order_time: {
-        type: DataTypes.DATE,
-        allowNull: false,
-      },
       customer_latitude: {
         type: DataTypes.DOUBLE,
         validate: {
@@ -55,6 +51,9 @@ module.exports = function (sequelize, DataTypes) {
         },
       },
       description: {
+        type: DataTypes.TEXT,
+      },
+      location: {
         type: DataTypes.TEXT,
       },
     },
