@@ -71,10 +71,10 @@ exports.createOrder = asyncHandler(async (req, res, next) => {
 
   drivers.sort((a, b) => a.distance - b.distance);
 
-  // req.body.driver_id = drivers[0].id;
+  req.body.driver_id = drivers[0].id;
 
   const order = await req.db.order.create(req.body);
-  // await drivers[0].update({ status: "going" });
+  await drivers[0].update({ status: "going" });
 
   res.status(200).json({
     success: true,
