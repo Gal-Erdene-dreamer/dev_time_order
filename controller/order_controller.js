@@ -3,7 +3,6 @@ const asyncHandler = require("../middleware/asyncHandler");
 const sequelize = require("sequelize");
 
 exports.getOrders = asyncHandler(async (req, res, next) => {
-  console.log(req.query)
   const orders = await req.db.order
     .scope({ method: ["filter_by_status", req.query.status] })
     .findAll({
@@ -16,6 +15,30 @@ exports.getOrders = asyncHandler(async (req, res, next) => {
       //     // attributes: ["name", "phone"],
       //   },
       // ],
+    });
+  res.status(200).json({
+    success: true,
+    orders,
+  });
+});
+
+exports.getMyOrders = asyncHandler(async (req, res, next) => {
+  console.log(req.current_user);
+  const role = {
+    driver: "driver_id",
+    superadmin: "user_id",
+    customer: "user_id",
+  };
+
+  // Use role name as a string when accessing the property
+  console.log(role[req.current_user.role]);
+  const orders = await req.db.order
+    .scope({ method: ["filter_by_status", req.query.status] })
+    .findAll({
+      where: {
+        [role[req.current_user.role]]: req.current_user.id,
+      },
+      include: ["user", "driver"],
     });
   res.status(200).json({
     success: true,

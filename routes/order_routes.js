@@ -8,6 +8,7 @@ const {
   getLocation,
   createOrder,
   getOrder,
+  getMyOrders,
   updateOrder,
   updateLocation,
   deleteOrder,
@@ -16,6 +17,8 @@ const {
 router.use(auth);
 // // API category
 router.route("/").get(getOrders).post(createOrder);
+
+router.route("/my_order").get(getMyOrders);
 
 router.route("/:id").get(getOrder).put(updateOrder).delete(deleteOrder);
 
