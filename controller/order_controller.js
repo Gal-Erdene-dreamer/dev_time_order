@@ -3,8 +3,9 @@ const asyncHandler = require("../middleware/asyncHandler");
 const sequelize = require("sequelize");
 
 exports.getOrders = asyncHandler(async (req, res, next) => {
+  console.log(req.query)
   const orders = await req.db.order
-    .scope({ method: ["filter_by_status", req.body.status] })
+    .scope({ method: ["filter_by_status", req.query.status] })
     .findAll({
       include: ["user", "driver"],
       // include: [

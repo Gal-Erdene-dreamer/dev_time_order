@@ -23,6 +23,7 @@ exports.login = asyncHandler(async (req, res, next) => {
 
   res.status(200).json({
     success: true,
+    user: user,
     token: user.getJsonWebToken(),
   });
 });
@@ -50,6 +51,7 @@ exports.employeeLogin = asyncHandler(async (req, res, next) => {
 
   res.status(200).json({
     success: true,
+    user: user,
     token: employee.getJsonWebToken(),
   });
 });
