@@ -27,14 +27,11 @@ module.exports = function (sequelize, DataTypes) {
       status: {
         type: Sequelize.ENUM,
         values: ["going", "new", "completed", "canceled"],
-        allowNull: false,
         defaultValue: "new",
       },
       priority: {
         type: Sequelize.ENUM,
         values: ["critical", "high", "medium", "low"],
-        allowNull: false,
-        defaultValue: "high",
       },
       customer_latitude: {
         type: DataTypes.DOUBLE,

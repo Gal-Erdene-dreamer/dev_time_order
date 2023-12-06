@@ -9,10 +9,26 @@
   },
   {
     "id": 2,
-    "name": "Болдын Цэцэг",
-    "phone": "94566556",
+    "name": "Чойжил Баттөгс",
+    "phone": "95614460",
     "role": "customer",
     "email": "batsukh@gmail.com",
+    "password": "1234"
+  },
+  {
+    "id": 3,
+    "name": "Болд Цэцэгжаргал",
+    "phone": "94566556",
+    "role": "customer",
+    "email": "tsetseg@gmail.com",
+    "password": "1234"
+  },
+  {
+    "id": 4,
+    "name": "Бямба Түвшинтөр",
+    "phone": "88564565",
+    "role": "customer",
+    "email": "tuvshin@gmail.com",
     "password": "1234"
   }
 ]
