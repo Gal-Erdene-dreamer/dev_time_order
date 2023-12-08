@@ -14,14 +14,11 @@ const {
   deleteOrder,
 } = require("../controller/order_controller");
 
-router.use(auth);
 // // API category
 router.route("/").get(getOrders).post(createOrder);
-
-router.route("/my_order").get(getMyOrders);
-
-router.route("/:id").get(getOrder).put(updateOrder).delete(deleteOrder);
-
 router.route("/location/:id").get(getLocation).put(updateLocation);
+
+router.use(auth).route("/my_order").get(getMyOrders);
+router.route("/:id").get(getOrder).put(updateOrder).delete(deleteOrder);
 
 module.exports = router;

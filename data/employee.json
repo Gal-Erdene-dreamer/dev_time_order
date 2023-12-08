@@ -14,7 +14,7 @@
   },
   {
     "id": 2,
-    "name": "Эмчийн Доктор",
+    "name": "Ганзам Болд",
     "hospital_id": 1,
     "phone": "99465655",
     "email": "bold@gmail.com",
@@ -23,6 +23,45 @@
     "longitude": "106.940370",
     "password": "1234",
     "status": "active",
+    "role": "doctor"
+  },
+  {
+    "id": 3,
+    "name": "Санжидын Батмөнх",
+    "hospital_id": 1,
+    "phone": "956545555",
+    "email": "batmunh@gmail.com",
+    "location": "Баянзүрх дүүрэг 8-р хороо",
+    "latitude": "47.91721353187576",
+    "longitude": "107.00388864554755",
+    "password": "1234",
+    "status": "active",
+    "role": "doctor"
+  },
+  {
+    "id": 4,
+    "name": "Улмаа Уламбаяр",
+    "hospital_id": 1,
+    "phone": "88854565",
+    "email": "ulmaa@gmail.com",
+    "location": "Тэнгэр плаза",
+    "latitude": "47.914799832535344",
+    "longitude": "106.97841505603567",
+    "password": "1234",
+    "status": "going",
+    "role": "doctor"
+  },
+  {
+    "id": 5,
+    "name": "Бат-Эрдэнэ Балдан",
+    "hospital_id": 1,
+    "phone": "905665456",
+    "email": "baldan@gmail.com",
+    "location": "Тэнгэр плаза",
+    "latitude": "47.90754490629809",
+    "longitude": "106.95676759121748",
+    "password": "1234",
+    "status": "going",
     "role": "doctor"
   }
 ]

@@ -71,26 +71,31 @@ exports.createOrder = asyncHandler(async (req, res, next) => {
     attributes: ["id", "latitude", "longitude"],
   });
 
-  const customerLatitude = req.body.customer_latitude;
-  const customerLongitude = req.body.customer_longitude;
-
-  console.log(drivers, customerLatitude, customerLongitude);
-
-  drivers.forEach((driver) => {
-    driver.distance = driver.haversineDistanceBetweenPoints(
-      driver.latitude,
-      driver.longitude,
-      customerLatitude,
-      customerLongitude
-    );
+  const user = await req.db.user.findOne({
+    where: { phone: req.body.phone },
   });
 
-  drivers.sort((a, b) => a.distance - b.distance);
+  // const customerLatitude = req.body.customer_latitude;
+  // const customerLongitude = req.body.customer_longitude;
 
-  req.body.driver_id = drivers[0].id;
+  // console.log(drivers, customerLatitude, customerLongitude);
+
+  // drivers.forEach((driver) => {
+  //   driver.distance = driver.haversineDistanceBetweenPoints(
+  //     driver.latitude,
+  //     driver.longitude,
+  //     customerLatitude,
+  //     customerLongitude
+  //   );
+  // });
+
+  // drivers.sort((a, b) => a.distance - b.distance);
+
+  // req.body.driver_id = drivers[0].id;
+  req.body.user_id = user.id;
 
   const order = await req.db.order.create(req.body);
-  await drivers[0].update({ status: "going" });
+  // await drivers[0].update({ status: "going" });
 
   res.status(200).json({
     success: true,
